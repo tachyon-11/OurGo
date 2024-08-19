@@ -2,11 +2,11 @@ package backend.dto;
 
 import java.util.List;
 
-public class diningPreffDetails {
+public class diningPreffDetailsDTO {
   private Integer id;
   private List<String> diningPreff;
 
-  public diningPreffDetails() {
+  public diningPreffDetailsDTO() {
   }
 
   public Integer getId() {

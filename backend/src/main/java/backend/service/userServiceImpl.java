@@ -59,6 +59,15 @@ public class userServiceImpl implements userService{
     user = userRepositoryDao.save(user);
     return user;
   }
+
+  @Override
+  public User saveAccomodationPreff(Integer id, List<String> accomodationPreff) {
+    Optional<User> fetchedUser = userRepositoryDao.findById(id);
+    User user = fetchedUser.get();
+    user.setAccommodation(accomodationPreff);
+    user = userRepositoryDao.save(user);
+    return user;
+  }
   
   
 }

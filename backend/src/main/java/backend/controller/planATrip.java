@@ -1,5 +1,6 @@
 package backend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,13 +16,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.MediaType;
 
-import java.util.List;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
 
 import backend.dto.LocationRequestDTO;
-import backend.dto.diningPreffDetails;
+import backend.dto.accomodationPreffDTO;
+import backend.dto.diningPreffDetailsDTO;
 import backend.dto.userDetailDTO;
 import backend.entity.User;
 import backend.service.userService;
@@ -33,6 +33,7 @@ public class planATrip {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String pythonServiceUrl = "http://localhost:6000//generateTags";
 
+    @Autowired
     public planATrip(userService uService) {
         this.uService = uService;
     }
@@ -83,8 +84,14 @@ public class planATrip {
     }
 
     @GetMapping("/getDiningPrefference")
-    public ResponseEntity<User> getDiningPrefference(@RequestBody diningPreffDetails diningPreffDTO){
+    public ResponseEntity<User> getDiningPrefference(@RequestBody diningPreffDetailsDTO diningPreffDTO){
         User updatedUser = uService.saveDiningPreff(diningPreffDTO.getId(), diningPreffDTO.getDiningPreff());
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/getAccomodationPrefference")
+    public ResponseEntity<User> getAccomodationPrefference(@RequestBody accomodationPreffDTO accomodationDTO){
+        User updatedUser = uService.saveAccomodationPreff(accomodationDTO.getId(), accomodationDTO.getAccomodationPreff());
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

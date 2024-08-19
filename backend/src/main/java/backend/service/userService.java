@@ -11,4 +11,5 @@ public interface userService {
   User saveUser(userDetailDTO userDTO);
   User saveLocation(Integer id, locationDetailDTO locationDTO);
   User saveDiningPreff(Integer id, List<String> diningPreff);
+  User saveAccomodationPreff(Integer id, List<String> accomodationPreff);
 } 

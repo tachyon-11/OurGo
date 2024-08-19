@@ -48,12 +48,10 @@ public class User {
   @Column(name="end-date")
   private Date endDate;
 
-  @ElementCollection
   @Column(name="travel-vibe-tags")
   private List<String> travelVibeTags;
 
-  @ElementCollection
-  @Column(name="travel-vibe-tags")
+  @Column(name="accomodation")
   private List<String> accommodation;
 
   public User() {
