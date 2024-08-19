@@ -3,12 +3,16 @@ package backend.entity;
 import backend.enums.gender;
 import backend.enums.traveller;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "user")
@@ -36,13 +40,23 @@ public class User {
   @Column(name="from-place")
   private String from;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
   @Column(name="start-date")
   private Date startDate;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
   @Column(name="end-date")
   private Date endDate;
 
-  public User(){
+  @ElementCollection
+  @Column(name="travel-vibe-tags")
+  private List<String> travelVibeTags;
+
+  @ElementCollection
+  @Column(name="travel-vibe-tags")
+  private List<String> accommodation;
+
+  public User() {
   }
 
   public Integer getId() {
@@ -117,4 +131,19 @@ public class User {
     this.endDate = endDate;
   }
 
+  public List<String> getTravelVibeTags() {
+    return travelVibeTags;
+  }
+
+  public void setTravelVibeTags(List<String> travelVibeTags) {
+    this.travelVibeTags = travelVibeTags;
+  }
+
+  public List<String> getAccommodation() {
+    return accommodation;
+  }
+
+  public void setAccommodation(List<String> accommodation) {
+    this.accommodation = accommodation;
+  }
 }

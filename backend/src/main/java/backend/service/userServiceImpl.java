@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
 
+import java.util.List;
 import java.util.Optional;
 import backend.dao.userDAO;
 import backend.dto.locationDetailDTO;
@@ -46,6 +47,15 @@ public class userServiceImpl implements userService{
     user.setFrom(locationDTO.getFrom());
     user.setStartDate(locationDTO.getStartDate());
     user.setEndDate(locationDTO.getEndDate());
+    user = userRepositoryDao.save(user);
+    return user;
+  }
+
+  @Override
+  public User saveDiningPreff(Integer id, List<String> diningPreff) {
+    Optional<User> fetchedUser = userRepositoryDao.findById(id);
+    User user = fetchedUser.get();
+    user.setTravelVibeTags(diningPreff);
     user = userRepositoryDao.save(user);
     return user;
   }
