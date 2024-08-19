@@ -1,15 +1,31 @@
 from flask import Flask, request, jsonify
 import google.generativeai as genai
 import json
+import random
+import time
 
 genai.configure(api_key='')
 model = genai.GenerativeModel('gemini-pro')
 
 app = Flask(__name__)
 
-def generateResponse(prompt):
-  response = model.generate_content(prompt)
-  return response
+def generateResponse(prompt, max_retries=1):
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = model.generate_content(prompt)
+            if response.text:
+                return response
+            else:
+                print(f"Attempt {attempt}: No response.text found. Retrying...")
+        except Exception as e:
+            print(f"Attempt {attempt}: Error generating content: {e}")
+
+        delay = random.uniform(0.5, 2) ** attempt 
+        time.sleep(delay)
+
+    print(f"All retries failed for prompt")
+    return None
+
 
 @app.route('/generateTags', methods=['POST'])
 def process_user():
@@ -34,6 +50,7 @@ def process_user():
 
             if traveller_type=="Solo":
                 traveller_type = "Solo " + user_gender + " traveller"
+            
 
             prompt = f"Describe {where} activities in 50-80 words, no bullet points, for tag creation which would help in creating personalized itenary using LLM."
 
@@ -41,20 +58,25 @@ def process_user():
 
             prompt = f"""
             Analyze the provided travel destination description and traveler profile to select the top 10 most relevant tags from the given list. Prioritize tags that accurately capture the destination's atmosphere, potential activities, and align with the traveler's interests and preferences. Consider factors like solo travel, group dynamics, and the destination's overall vibe. Traveler Profile: {traveller_type} Age of Traveller: {age} Destination: {where} Description of destination : {descriptionOfLocation} Tag Lists:- tag_list = ["Adventure Junkie", "Cultural Enthusiast", "Foodie Fiesta", "Luxury Traveler", "Nature Explorer", "History Buff", "Shutterbug", "Festival Goer", "Digital Nomad", "Spiritual Seeker", "Relax and Recharge", "City Nightlife Explorer", "Music Lover", "Shopping Enthusiast", "Language Learner", "Sports Fan", "Urban Explorer", "Beach Bum", "Road Tripper", "Art Addict", "Party animal", "Motor rider", "Ski Enthusiast", "Luxury Cruiser", "Island Hopper", "Scenic Train Traveler", "Wildlife Safari Adventurer", "Camping Enthusiast", "Mountain Climber", "Wine Connoisseur", "Hiking Enthusiast", "Water Baby", "Hot Air Balloon Rider", "Fishing Enthusiast", "Yoga retreat", "Gaming and Entertainment", "Bibliophile", "Romantic Retreat", "Honeymoon", "Do-together activities", "Meet new people", "Amusement parks", "Fun for kids"] Provide the output as a Python list with elements from tag_list and please use only from the given tags. Also ensure that Do-together activities is for only friends, couples and families
+            I want the output to be in the following format which is a python array with 10 tags:-  
+            ["tag1", "tag2", "tag3", "tag4"....."tag9", "tag10"]
             """
 
             response = generateResponse(prompt)
-
-            data_string = response.text
-            # Convert the stringified list to a Python list
-            tag_list = json.loads(data_string)
-
-
-            return jsonify({
-                "status": "success",
-                "data": tag_list
-            }), 200
-
+            
+            if response:
+                data_string = response.text
+                tag_list = json.loads(data_string)
+                return jsonify({
+                    "status": "success",
+                    "data": tag_list
+                }), 200
+            else:
+                return jsonify({
+                    "status": "success",
+                    "data": []
+                }), 200
+                
         except KeyError as e:
             return jsonify({"error": f"Missing field: {str(e)}"}), 400
 
