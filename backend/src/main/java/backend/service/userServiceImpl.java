@@ -1,6 +1,5 @@
 package backend.service;
 
-import org.hibernate.annotations.DialectOverride.OverridesAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import backend.dao.userDAO;
 import backend.dto.locationDetailDTO;
+import backend.dto.sliderDTO;
 import backend.dto.userDetailDTO;
 import backend.entity.User;
 
@@ -55,7 +55,7 @@ public class userServiceImpl implements userService{
   public User saveDiningPreff(Integer id, List<String> diningPreff) {
     Optional<User> fetchedUser = userRepositoryDao.findById(id);
     User user = fetchedUser.get();
-    user.setTravelVibeTags(diningPreff);
+    user.setDiningPreff(diningPreff);
     user = userRepositoryDao.save(user);
     return user;
   }
@@ -68,6 +68,25 @@ public class userServiceImpl implements userService{
     user = userRepositoryDao.save(user);
     return user;
   }
-  
-  
+
+  @Override
+  public User saveSliderInfo(Integer id, sliderDTO slider) {
+    Optional<User> fetchedUser = userRepositoryDao.findById(id);
+    User user = fetchedUser.get();
+    user.setActivityIntensity(slider.getActivityIntensity());
+    user.setSocialCriteria(slider.getSocialCriteria());
+    user.setTimeOfDay(slider.getTimeOfDay());
+    user.setTravelStyle(slider.getTravelStyle());
+    user = userRepositoryDao.save(user);
+    return user;
+  }
+
+  @Override
+  public User saveTravelVibeTags(Integer id, List<String> travelVibeTags) {
+    Optional<User> fetchedUser = userRepositoryDao.findById(id);
+    User user = fetchedUser.get();
+    user.setTravelVibeTags(travelVibeTags);
+    user = userRepositoryDao.save(user);
+    return user;
+  }
 }
