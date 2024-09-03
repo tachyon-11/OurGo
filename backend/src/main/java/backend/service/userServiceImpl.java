@@ -35,6 +35,7 @@ public class userServiceImpl implements userService{
     user.setAge(userDTO.getAge());
     user.setTravellerType(userDTO.getTypeOfTraveller());
     user.setUserGender(userDTO.getUserGender());
+    user.setUserBudget(userDTO.getUserBudget());
     user = userRepositoryDao.save(user);
     return user;
   }

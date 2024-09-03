@@ -1,0 +1,3 @@
+{
+  "prompt": "Given the following list of travel vibe tags: {user_travel_tags}\nCreate a coherent and flowing sentence or short paragraph that describes the traveler's style, preferences, and interests. The description should:\n1. Incorporate all the given tags naturally.\n2. Avoid simply listing the tags, but instead weave them into a narrative.\n3. Use varied language and synonyms to prevent repetition.\n4. Capture the essence of the traveler's personality and interests.\n5. Be concise yet comprehensive, ideally no more than 3-4 sentences."
+}

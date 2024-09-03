@@ -139,4 +139,39 @@ public class planATrip {
             throw new RuntimeJsonMappingException("Error converting User to JSON: " + e.getMessage());
         }
     }
+
+    @PostMapping("/getAttraction")
+    public ResponseEntity<String> getAttractions(@RequestBody Integer theId) {
+        User user = uService.findByUser(theId);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String userJson = objectMapper.writeValueAsString(user);
+        
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> entity = new HttpEntity<>(userJson, headers);
+        
+            try {
+                ResponseEntity<String> response = restTemplate.exchange(
+                    "http://localhost:6000/getAttractions",
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+                );
+        
+                return response;
+        
+            } catch (HttpClientErrorException e) {
+                throw new RuntimeJsonMappingException("Error calling Python service: " + e.getMessage());
+        
+            } catch (RestClientException e) {
+                throw new RuntimeJsonMappingException("Error calling Python service: " + e.getMessage());
+            }
+        
+        } catch (Exception e) {
+            throw new RuntimeJsonMappingException("Error converting User to JSON: " + e.getMessage());
+        }
+    }
+
+    
 }

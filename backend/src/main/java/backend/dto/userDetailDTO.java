@@ -1,5 +1,6 @@
 package backend.dto;
 
+import backend.enums.budget;
 import backend.enums.gender;
 import backend.enums.traveller;
 
@@ -8,9 +9,9 @@ public class userDetailDTO {
   private int age;
   private gender userGender;
   private traveller typeOfTraveller; 
+  private budget userBudget;
 
   public userDetailDTO(){
-    
   }
 
   public String getName() {
@@ -43,5 +44,13 @@ public class userDetailDTO {
 
   public void setTypeOfTraveller(traveller typeOfTraveller) {
     this.typeOfTraveller = typeOfTraveller;
+  }
+
+  public budget getUserBudget(){
+    return userBudget;
+  }
+
+  public void setUserBudget(budget userBudget){
+    this.userBudget = userBudget;
   }
 }

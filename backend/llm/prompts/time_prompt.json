@@ -1,0 +1,3 @@
+{
+  "prompt": "Given a time_of_day value equal to {user_time_of_day} on scale of 1 to 5. Close to 1 means wanting to start seeing places from early in morning and being 4 or 5 means inclination towards staying up late and exploring till late night. Create a coherent and flowing sentence that describes the time of day the traveler generally likes to start and mostly travel and see the places of interest. Moreover, the response should be such that it is easier for LLM Model to be able to use this to create and personally curate a list of places of attraction."
+}

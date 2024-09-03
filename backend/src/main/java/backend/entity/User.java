@@ -1,5 +1,6 @@
 package backend.entity;
 
+import backend.enums.budget;
 import backend.enums.gender;
 import backend.enums.traveller;
 import jakarta.persistence.Column;
@@ -29,6 +30,9 @@ public class User {
 
   @Column(name="gender")
   private gender userGender;
+
+  @Column(name="budget")
+  private budget userBudget;
 
   @Column(name="traveler-type")
   private traveller travellerType;
@@ -97,6 +101,14 @@ public class User {
 
   public gender getUserGender() {
     return userGender;
+  }
+
+  public budget getUserBudget(){
+    return userBudget;
+  }
+
+  public void setUserBudget(budget userBudget){
+    this.userBudget = userBudget;
   }
 
   public void setUserGender(gender userGender) {

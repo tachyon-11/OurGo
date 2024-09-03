@@ -1,0 +1,132 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.window {
+  width: 1000px;
+  height: 650px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.sideBar {
+  width: 32%;
+  background-color: #a5a3a3;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 20px;
+  border-color: black;
+}
+
+.mainBar {
+  width: 68%;
+  background-color: #f9f9f9;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+input[type="text"]::placeholder,
+select {
+  color: #bbb;
+}
+
+button {
+  padding: 15px;
+  background-color: #ddd;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  color: white;
+  cursor: not-allowed;
+  text-align: center;
+}
+
+button:active {
+  background-color: #bbb;
+}
+
+button:enabled {
+  background-color: #333;
+  cursor: pointer;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.date-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.date-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+

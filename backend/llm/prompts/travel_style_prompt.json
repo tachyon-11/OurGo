@@ -1,0 +1,3 @@
+{
+  "prompt" : "Given a value:- Travel_style = {user_travel_style} on scale of 1 to 5. 1 means wanting to explore only popular location and 5 means inclination towards off-beat locations. Create a coherent and flowing sentence that describes the traveler's style. Also don't mention travel style rating in response. Moreover, the response should be such that it is easier for LLM Model to be able to use this to create a list of places of attraction."
+}
