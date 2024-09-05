@@ -131,9 +131,9 @@ def attractionPrompt(user, travelVibe, timeOfDay, travelStyle):
 
             7. If the group consist of girls also ensure to that places suggested are specifically safe 
 
-            Return a list of all the places with a short description. The list should be a Python array with each item being a dictionary with two keys: "name" and "description".
-
-            The output should be formatted as shown:
+            I want you return simply a list of all the places with a short description.
+            The list should be a python array with each item being a dictionary with three keys keys:- "name", "description"
+            the output should be as shown:-
             [
                 "name": "Name of first place", "description": "Some description of that place",
                 "name": "Name of second Place", "description": "Some description of that place",

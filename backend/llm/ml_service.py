@@ -132,7 +132,7 @@ def get_attractions():
 
             travelVibe = generateResponse(travelVibePrompt(user))
 
-            travelStyle = generateResponse(travelStyleprompt(user))
+            travelStyle = generateResponse(travelStylePrompt(user))
 
             timeOfDay = generateResponse(timePrompt(user))
 
@@ -157,7 +157,6 @@ def get_attractions():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=6000)
