@@ -7,14 +7,15 @@ from prompts import *
 from userProfile import UserProfile
 
 genai.configure(api_key='')
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-1.5-pro-latest')
 
 app = Flask(__name__)
 
 def generateResponse(prompt, max_retries=3):
     for attempt in range(1, max_retries + 1):
         try:
-            response = model.generate_content(prompt)
+            response = model.generate_content(prompt, generation_config=genai.GenerationConfig(
+        response_mime_type="application/json"))
             if response.text:
                 return response
             else:
